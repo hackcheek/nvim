@@ -169,9 +169,9 @@ call s:hi('SpecialKey', s:palette.gray04, [], '')
 call s:hi('NonText', s:palette.gray04, [], '')
 call s:hi('Directory', s:palette.gray08, [], '')
 
-call s:hi('Pmenu', s:palette.green, s:palette.panblack, 'none')
+call s:hi('Pmenu', s:palette.pangray, s:palette.panblack, 'none')
 call s:hi('PmenuSbar', s:palette.black, s:palette.gray15, 'none')
-call s:hi('PmenuSel', s:palette.panblack, s:palette.green, '')
+call s:hi('PmenuSel', s:palette.panblack, s:palette.pangray, '')
 call s:hi('PmenuThumb', s:palette.panblack, s:palette.gray09, 'none')
 
 call s:hi('StatusLine', s:palette.gray11, s:palette.gray03, 'none')
