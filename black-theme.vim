@@ -15,7 +15,8 @@ let g:colors_name = "yin"
 
 let s:palette = {}
 
-let s:palette.pandark    = [222, '#080808']
+let s:palette.visual     = [222, '#151515']
+let s:palette.pandark    = [222, '#111111']
 let s:palette.panblack   = [222, '#292929']
 let s:palette.pangray    = [223, '#969a9d']
 let s:palette.pangray2   = [224, '#606569']
@@ -146,7 +147,7 @@ call s:hi('FoldColumn', s:palette.gray07, s:palette.black, 'none')
 call s:hi('CursorLine', [], s:palette.gray01, 'none')
 call s:hi('CursorLineNr', s:palette.gray14, s:palette.gray01, 'none')
 
-call s:hi('Visual', s:palette.black, s:palette.panblack, '')
+call s:hi('Visual', s:palette.black, s:palette.visual, '')
 call s:hi('Search', s:palette.gray01, s:palette.gray11, 'none')
 call s:hi('IncSearch', s:palette.black, s:palette.gray07, 'bold')
 
@@ -169,7 +170,7 @@ call s:hi('SpecialKey', s:palette.gray04, [], '')
 call s:hi('NonText', s:palette.gray04, [], '')
 call s:hi('Directory', s:palette.gray08, [], '')
 
-call s:hi('Pmenu', s:palette.pangray, s:palette.panblack, 'none')
+call s:hi('Pmenu', s:palette.pangray, s:palette.pandark, 'none')
 call s:hi('PmenuSbar', s:palette.black, s:palette.gray15, 'none')
 call s:hi('PmenuSel', s:palette.panblack, s:palette.pangray, '')
 call s:hi('PmenuThumb', s:palette.panblack, s:palette.gray09, 'none')
@@ -246,7 +247,7 @@ function MyCustomHighlights()
     hi semshiAttribute       ctermfg=49  guifg=#5eddc1
     hi semshiSelf            ctermfg=249 guifg=#b2b2b2
     hi semshiUnresolved      ctermfg=226 guifg=#fae12c cterm=underline gui=underline
-    hi semshiSelected        ctermfg=231 guifg=#292929 cterm=bold gui=bold ctermbg=161 guibg=#5eddc1
+    hi semshiSelected        ctermfg=231 guifg=#eeeeee cterm=bold gui=bold ctermbg=161 guibg=#080808
 
     hi semshiErrorSign       ctermfg=231 guifg=#cc1100 ctermbg=160 guibg=#00000000
     hi semshiErrorChar       ctermfg=231 guifg=#cc1100 ctermbg=160 guibg=#00000000
