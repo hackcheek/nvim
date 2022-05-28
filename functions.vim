@@ -117,3 +117,17 @@ autocmd InsertLeave * set nocursorline
 "set nocursorline
 
 " trasparent end
+silent! call repeat#set("\<Plug>MyWonderfulMap", v:count)
+
+" Coc
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+

@@ -1,4 +1,4 @@
- "SETTINGS
+" SETTINGS
 " General
 set title                          " change the terminal's title
 set history=1000                   " keep 100 lines of command line history
@@ -18,12 +18,8 @@ set shortmess+=c                   " Abbrev. of messages (avoids 'hit enter')
 set updatetime=300
 set viewoptions=cursor,folds,slash,unix
 " vertical/horizontal scroll off settings
-if !&scrolloff
-  set scrolloff=7
-endif
-if !&sidescrolloff
-  set sidescrolloff=5
-endif
+set scrolloff=7
+set sidescrolloff=5
 
 " No bell or flash wanted
 set novisualbell " No blinking
@@ -31,26 +27,17 @@ set noerrorbells " No noise.
 set vb t_vb=     " disable any beeps or flashes on error
 
 " Use the '*' register as well as the the '+' register if it's available too
-set clipboard=unnamed
-if has('unnamedplus')|set clipboard+=unnamedplus|endif
+set clipboard+=unnamedplus
 
 " Configure to primarily use utf8
-if has("multi_byte")
-  if &termencoding == ""|let &termencoding = &encoding|endif
-endif
 set encoding=utf-8
 setglobal fileencoding=utf-8
-set fileformats=unix,dos,mac "set compatible line endings in order of preference
+set fileformats=unix "set compatible line endings in order of preference
 
 " Enable mouse
-if has("mouse")
-  set mouse=a
-  set mousehide
-  set mousemodel=popup
-  if !has('nvim')
-    set ttymouse=xterm2
-  endif
-endif
+set mouse=a
+set mousehide
+set mousemodel=popup
 
 " Editor Settings
 set cmdheight=1          " the command bar is 2 high
@@ -90,52 +77,15 @@ if &t_Co > 2 || GUI()
   syntax enable
 endif
 " default colorscheme
-if (has("termguicolors"))
- set termguicolors
-endif
-if GUI()
-  set t_Co=256
-  "colorscheme badwolf
-  "colorscheme gruvbox
-  colorscheme tender
-  let macvim_skip_colorscheme=1
-  hi Comment ctermfg=bg ctermbg=NONE
-  hi Comment guifg=#585858 guibg=NONE
-elseif &t_Co >= 256
-  "colorscheme badwolf
-  "colorscheme gruvbox
-  colorscheme tender
-  hi Comment guifg=#585858 guibg=NONE
-  hi Comment ctermfg=bg ctermbg=NONE
-else
-  set t_Co=8
-  "colorscheme badwolf
-  "colorscheme gruvbox
-  colorscheme tender
-endif
+set termguicolors
 
 " GUI options
-if GUI()
-  set guicursor=a:blinkon0 " cursor-blinking off!!
-  set guioptions=ac
-  set guioptions+=p " enable pointer callbacks for X11 (required by some WMs)
-  set guioptions+=h " prevent the cursor jumping to the longest line while scrolling
-  set winaltkeys=no " don't select the menu when pressing the alt-keys
-  " Fonts
-  if WINDOWS()
-    set gfn=Fira_Code:h14
-  elseif OSX()
-    set gfn=Fira_Code:h14
-  else
-    set gfn=Fira\ Code:h14
-  endif
-endif
+set gfn=Fira\ Code:h14
 
-" Language Settings
-" Highlight problematic whitespace (spaces before tabs)
 highlight SpellBad term=underline gui=undercurl guisp=Orange
-" highlight clear SignColumn " SignColumn should match background
-" highlight clear LineNr " Current line number row will have same background color in relative mode
+
+" Bufferline
+highlight NvimTreeFolderIcon guibg=blue
 
 " Files, backups and undo
 " Turn backup off, since most stuff are in git anyway...
@@ -143,19 +93,18 @@ set nobackup
 set nowb
 set noswapfile
 " enable persistent undo
-if has('persistent_undo')
-  set undodir=$HOME/.vim/.undofile
-  set undofile
-  set undolevels=1000  " maximum number of changes that can be undone
-  set undoreload=10000 " maximum number lines to save for undo on a buffer reload
-  if ! isdirectory(&undodir)
+set undodir=$HOME/.vim/.undofile
+set undofile
+set undolevels=1000  " maximum number of changes that can be undone
+set undoreload=10000 " maximum number lines to save for undo on a buffer reload
+
+if ! isdirectory(&undodir)
     call mkdir(&undodir, 'p')
-  endif
 endif
 
 " Wrap
 set display=lastline         " don't display @ with long paragraphs
-" set formatoptions=tcroql     " t=text, c=comments, q=format with gq command, o,r=autoinsert comment leader
+ "set formatoptions=tcroql     " t=text, c=comments, q=format with gq command, o,r=autoinsert comment leader
 set formatoptions=roqnl12    " How automatic formatting is to be done
 set lbr                      " line break
 set nojoinspaces             " Prevents inserting two spaces after punctuation on a join (J)
@@ -200,3 +149,4 @@ set sessionoptions=buffers,curdir,folds,tabpages,winsize
 let s:sessiondir  = expand("~/.vim/sessions", 1)
 let s:sessionfile = expand(s:sessiondir . "/session.vim", 1)
 let s:sessionlock = expand(s:sessiondir . "/session.lock", 1)
+

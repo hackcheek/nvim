@@ -20,22 +20,22 @@ nmap <silent> <Space> za
 vmap <silent> <Space> zf
 
 " enable/disable list
-"nmap <silent> <C-l> :set nolist!<CR>
+nmap <silent> <C-l> :set nolist!<CR>
 
 " Map escape key to jj
 "imap jj <ESC>
 
 "" Fast saving
 nmap <leader>w :w!<cr>
-nmap <leader>x :wq<cr>
+nmap <leader>x :q<cr>
 
 " :W sudo saves the file
 " (useful for handling the permission-denied error)
 "command W w !sudo tee % > /dev/null
 
 " Move visual block
-vnoremap <c-J> :m '>+1<CR>gv=gv
-vnoremap <c-K> :m '<-2<CR>gv=gv
+vnoremap <C-j> :m '>+1<cr>gv=gv
+vnoremap <C-k> :m '<-2<CR>gv=gv
 
 " Spell commands
 nmap ?n ]s
@@ -72,10 +72,61 @@ nnoremap <silent> <C-w>3 :only<CR> <C-w>v<C-w>s
 nnoremap <silent> <C-w>4 :only<CR> <C-w>v<C-w>s<C-w>h<C-w>s
 
 " switch to the directory of the open buffer
-map <leader>cd :cd %:p:h<cr>
+nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 
 " set text wrapping toggles
 nmap <silent> tw :set invwrap<cr>:set wrap?<cr>
 
 " Underline the current line with '-'
-nmap <silent> <leader>ul :t.<CR>Vr-
+" Mapping selecting mappings
+
+
+"FZF
+
+" Git Files
+nnoremap <leader>gg :cd $HOME<CR>:GFiles<CR>
+" Grep
+nnoremap <leader>gr :cd $HOME<CR>:Rg<CR>
+" Files
+nnoremap <leader>ff :cd $HOME<CR>:Files<CR>
+let g:fzf_preview_windows = 'right:60%'
+
+command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, {'options': ['--preview', 'preview {}']}, <bang>0)
+command! -bang -nargs=? -complete=dir GFiles call fzf#vim#gitfiles(<q-args>, {'options': ['--preview', 'preview {}']}, <bang>0)
+command! -bang -nargs=* Rg call fzf#vim#grep('rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0)
+
+
+" Bufferline
+
+nnoremap <A-r> :NvimTreeToggle<CR>
+nnoremap <leader>n :NvimTreeFindFile<CR>
+
+" Tabs
+nmap <leader>j :tabprevious<CR>
+nmap <leader>k :tabnext<CR>
+
+" Coc
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <leader> r  <Plug>(coc-rename)
+
+ "yapf
+map <C-Y> :call yapf#YAPF()<CR>
+imap <C-Y> <c-o>:call yapf#YAPF()<cr>
+
+" Databases
+nmap <leader>db :%DB mysql://root@localhost/<CR>
+vmap <leader>db :'<,'>DB mysql://root@localhost/<CR>
+nmap <leader>du :DBUI<CR>
+
+
+" Magma jupyter
+nmap <leader>,  :MagmaEvaluateOperator<CR>
+nmap <leader>,l :MagmaEvaluateLine<CR>
+xmap <leader>,  :<C-u>MagmaEvaluateVisual<CR>
+nmap <leader>,c :MagmaReevaluateCell<CR>
+nmap <leader>,d :MagmaDelete<CR>
+nmap <leader>,o :MagmaShowOutput<CR>
+

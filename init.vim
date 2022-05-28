@@ -19,12 +19,12 @@ if WINDOWS()
   set rtp=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
 endif
 
-source /root/.config/nvim/bundles.vim
-source /root/.config/nvim/settings.vim
-source /root/.config/nvim/map.vim
-source /root/.config/nvim/plugins.vim
-source /root/.config/nvim/functions.vim
-source /root/.config/nvim/autocmd.vim
-source /root/.config/nvim/lotus.vim
-source /root/.config/nvim/lotusbar.vim
-source /root/.config/nvim/theme.vim
+
+source /home/cheek/.config/nvim/bundles.vim
+source /home/cheek/.config/nvim/settings.vim
+source /home/cheek/.config/nvim/plugins.vim
+source /home/cheek/.config/nvim/functions.vim
+source /home/cheek/.config/nvim/autocmd.vim
+source /home/cheek/.config/nvim/lotusbar.vim
+source /home/cheek/.config/nvim/map.vim
+source /home/cheek/.config/nvim/black-theme.vim

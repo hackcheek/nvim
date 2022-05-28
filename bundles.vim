@@ -1,81 +1,84 @@
-" Required:
-if has('vim_starting')
-  set nocompatible
-  set sessionoptions-=options
-endif
-
-" PLUGINS BUNDLE
-if has('nvim') && empty(glob('~/.config/nvim/autoload/plug.vim'))
-  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-elseif empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-" Plug Groups
-" List only the plugin groups you will use
-if !exists('g:bundle_groups')
-  let g:bundle_groups=['general', 'devel', 'languages', 'colorscheme']
-endif
-
 " Plugs here:
+
+
 " GENERAL
+
 call plug#begin(expand($HOME.'/.vim/bundle'))
-if count(g:bundle_groups, 'general')
-  if executable('ack')
-    Plug 'mileszs/ack.vim'
-  endif
 
-  Plug 'Konfekt/FastFold'
-  Plug 'easymotion/vim-easymotion'
-  Plug 'Stormherz/tablify'
-  Plug 'chrisbra/vim-diff-enhanced'
-  Plug 'editorconfig/editorconfig-vim'
-  Plug 'itchyny/calendar.vim'
-  Plug 'itchyny/vim-cursorword'
-  Plug 'mbbill/undotree'
-  Plug 'mhinz/vim-startify'
-  Plug 'terryma/vim-multiple-cursors'
-  Plug 'troydm/easybuffer.vim'
-  Plug 'yuttie/comfortable-motion.vim'
-  if has('nvim')
-    Plug 'nvim-lua/plenary.nvim'
-  else
-    Plug 'ctrlpvim/ctrlp.vim'
-    Plug 'tacahiroy/ctrlp-funky'
-  endif
-endif
-" DEVELOPER
-if count(g:bundle_groups, 'devel')
-  Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-  Plug 'osyo-manga/vim-over'
-  Plug 'mattn/emmet-vim'
-  Plug 'jiangmiao/auto-pairs'
-  Plug 'scrooloose/nerdtree'
-  Plug 'Xuyuanp/nerdtree-git-plugin'
-  Plug 'Yggdroot/indentLine'
-  Plug 'godlygeek/tabular'
-  Plug 'airblade/vim-gitgutter'
-  Plug 'scrooloose/nerdcommenter'
-  Plug 'w0rp/ale'
-endif
-" LANGUAGES
-if count(g:bundle_groups, 'languages')
-  Plug 'ap/vim-css-color'
-  Plug 'sheerun/vim-polyglot'
-endif
-" COLORSCHEME
-if count(g:bundle_groups, 'colorscheme')
-  Plug 'jacoborus/tender.vim'
-  Plug 'morhetz/gruvbox'
-  Plug 'sjl/badwolf'
-  Plug 'embark-theme/vim', { 'as': 'embark', 'branch': 'main' }
-endif
+" Syntax
+
+" Highligth
+Plug 'itchyny/vim-cursorword'                               " Word Underlined
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Main Highligth
+Plug 'romgrk/nvim-treesitter-context'                       " View Function Father
+Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }    " Python Highligth
+Plug 'Glench/Vim-Jinja2-Syntax'                             " Jinja2 Highligth
+Plug 'ap/vim-css-color'                                     " Css Highligth
+Plug 'sheerun/vim-polyglot'                                 " Good Highligth
+
+" Markdown
+Plug 'junegunn/goyo.vim'
+Plug 'iamcco/markdown-preview.nvim'
+
+" Errors and formatting
+Plug 'dense-analysis/ale' " Error Highligth
+Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
+
+" Typing
+Plug 'tpope/vim-surround'   " Enclose Vars
+Plug 'jiangmiao/auto-pairs' " Automatic Closed
+Plug 'ervandew/supertab'
+
+
+"Autocomplete
+
+Plug 'neoclide/coc.nvim', { 'branch': 'release' } " COC Autocomplete
+Plug 'mattn/emmet-vim'                            " Fast Html Code
+
+
+"Tree
+
+Plug 'scrooloose/nerdtree'          " Tree of Files
+Plug 'Xuyuanp/nerdtree-git-plugin'  " Git in Files of Tree
+
+
+"Fuzzer
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+
+
+"IDE
+
+Plug 'Stormherz/tablify'             " Create Tables
+Plug 'Konfekt/FastFold'              " Mini Folds in Proyect
+Plug 'easymotion/vim-easymotion'     " Move to a Any Word
+Plug 'chrisbra/vim-diff-enhanced'    " View Change in the Proyect
+Plug 'editorconfig/editorconfig-vim' " Fyletypes Compatibilities
+Plug 'itchyny/calendar.vim'          " A Calendar
+Plug 'mbbill/undotree'               " View the Last Changes
+Plug 'mhinz/vim-startify'            " Default Screen When Start Nvim
+Plug 'terryma/vim-multiple-cursors'  " Multiple Cursors
+Plug 'troydm/easybuffer.vim'         " Save Cache of Proyects
+Plug 'yuttie/comfortable-motion.vim' " Slip Up and Down
+Plug 'osyo-manga/vim-over'           " Change All Same Words
+Plug 'scrooloose/nerdcommenter'      " Fast Commenter
+Plug 'airblade/vim-gitgutter'        " View Git Changes
+
+Plug 'dccsillag/magma-nvim', { 'do': ':UpdateRemotePlugins' }
+
+Plug 'tpope/vim-repeat' " Contemplate plugins on repeats (.)
+
+" Databases with Dadbod completion
+
+Plug 'tpope/vim-dadbod'
+Plug 'kristijanhusak/vim-dadbod-completion'
+Plug 'kristijanhusak/vim-dadbod-ui'
+
+Plug 'Shougo/deoplete.nvim'
+
+Plug 'vim-denops/denops.vim'
+Plug 'Shougo/ddc.vim'
+
+
 call plug#end()
-
-" embark theme
-"Plug 'embark-theme/vim', { 'as': 'embark', 'branch': 'main' }
-"call packager#add('embark-theme/vim', { 'name': 'embark' })
