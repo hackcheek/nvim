@@ -8,7 +8,7 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   use({
-	  'nvim-telescope/telescope.nvim', tag = '0.1.1',
+	  'nvim-telescope/telescope.nvim', tag = '0.1.4',
 	-- or                            , branch = '0.1.x',
 	  requires = { {'nvim-lua/plenary.nvim'} }
   })
@@ -47,4 +47,7 @@ return require('packer').startup(function(use)
 
   -- Iron vim (repl interpreter)
   use {'Vigemus/iron.nvim'}
+
+  -- Git blame
+  use {'f-person/git-blame.nvim'}
 end)
