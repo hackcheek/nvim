@@ -44,10 +44,26 @@ return require('packer').startup(function(use)
 
   -- Colorscheme
   use({ 'rose-pine/neovim', as = 'rose-pine' })
+  use 'AlexvZyl/nordic.nvim'
+  use 'olivercederborg/poimandres.nvim'
 
   -- Iron vim (repl interpreter)
   use {'Vigemus/iron.nvim'}
 
   -- Git blame
   use {'f-person/git-blame.nvim'}
+
+  -- Markdown preview
+  -- use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, }) 
+  use({ 'toppair/peek.nvim', run = 'deno task --quiet build:fast' })
+
+  -- Easy motion
+  use {
+  'phaazon/hop.nvim',
+  branch = 'v2', -- optional but strongly recommended
+  config = function()
+    -- you can configure Hop the way you like here; see :h hop-config
+    require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
+  end
+}
 end)
